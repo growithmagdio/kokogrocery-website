@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KOKO Global Distributor | Authentic Indian Food Export & Wholesale</title>
+  <meta name="description" content="KOKO Global Distributor connects trusted Indian food manufacturers with international buyers through premium product sourcing, quality assurance, export management, and global logistics." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            koko: {
+              black: '#1C1C1C',
+              dark: '#141414',
+              card: '#242424',
+              border: '#333333',
+              gold: '#EFA721',
+              'gold-light': '#F8C765',
+              'gold-dark': '#C9850E',
+            }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1C1C1C;
+      color: #FFFFFF;
+      font-family: 'Outfit', 'Inter', sans-serif;
+    }
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #FFF0B9 0%, #EFA721 50%, #C9850E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn-gold-glow {
+      box-shadow: 0 4px 20px rgba(239, 167, 33, 0.3);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-gold-glow:hover {
+      box-shadow: 0 6px 30px rgba(239, 167, 33, 0.5);
+      transform: translateY(-2px);
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #141414; }
+    ::-webkit-scrollbar-thumb { background: #333333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #EFA721; }
+  </style>
+
+  <!-- React & Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#1C1C1C] text-white selection:bg-[#EFA721] selection:text-[#1C1C1C]">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // --- DATA ---
+    const CATEGORIES = [
+      { id: 'cat-rice', name: 'Rice', slug: 'rice', description: 'Premium Indian rice varieties including Ponni, Idly Rice, Seeraga Samba, Sona Masoori, Basmati, and Karuppu Kavuni rice.', count: 33, image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop' },
+      { id: 'cat-millets', name: 'Millets', slug: 'millets', description: 'Nutritious traditional Indian millets such as Foxtail Millet, Little Millet, Kodo Millet, Barnyard Millet, Finger Millet, Pearl Millet, and Sorghum.', count: 14, image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop' },
+      { id: 'cat-pulses', name: 'Pulses', slug: 'pulses', description: 'High-quality lentils and pulses including Toor Dal, Urad Dal, Moong Dal, Chana Dal, Masoor Dal, Lobia, and whole pulses.', count: 21, image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'cat-spices', name: 'Spices & Seasonings', slug: 'spices-seasonings', description: 'A complete range of authentic Indian spices, spice powders, whole spices, masalas, and seasoning blends.', count: 94, image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop' },
+      { id: 'cat-coffee', name: 'Coffee', slug: 'coffee', description: 'Premium filter coffee, instant coffee, coffee powders, and specialty coffee products.', count: 12, image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop' },
+      { id: 'cat-frozen', name: 'Frozen Foods', slug: 'frozen-foods', description: 'Frozen vegetables, ready-to-cook products, frozen snacks, and convenience foods.', count: 19, image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop' },
+      { id: 'cat-snacks', name: 'Snacks & Sweets', slug: 'snacks-sweets', description: 'Traditional Indian snacks, savouries, sweets, bakery products, and ready-to-eat foods.', count: 97, image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?q=80&w=800&auto=format&fit=crop' },
+      { id: 'cat-grocery', name: 'Grocery Products', slug: 'grocery-products', description: 'Pickles, flour, papad, jaggery, coconut products, dry fruits, ready mixes, beverages, and other essential grocery items.', count: 140, image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop' }
+    ];
+
+    const PRODUCTS = [
+      { id: 'p1', name: 'South Indian Ponni Boiled Rice', category: 'Rice', origin: 'Cauvery Delta, Tamil Nadu', description: 'Soft, fluffy, and non-sticky. Sourced from the fertile paddy fields nourished by the Cauvery River.', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p2', name: 'South Indian Idly Rice', category: 'Rice', origin: 'Andhra Pradesh, Telangana, Karnataka', description: 'Short-grain, non-sticky, ensures soft, spongy idlis and crisp dosas every time.', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p3', name: 'Seeraga Samba Rice', category: 'Rice', origin: 'Tamil Nadu', description: 'Distinctive aromatic fragrance. Holds shape after cooking. Ideal for traditional Biryani.', image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p4', name: 'Sonna Masoori Rice', category: 'Rice', origin: 'Cauvery Delta, Karnataka', description: 'Medium-grain rice, low in starch, light, aromatic, and easy to digest.', image: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p5', name: 'Basmathi Rice', category: 'Rice', origin: 'Haryana, Punjab, Uttarakhand', description: 'Queen of Aromatic Rice. Long, slender, fluffy separate grains for biryani and pulao.', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p6', name: 'Toor Dal', category: 'Pulses', origin: 'Andhra Pradesh, Telangana, Karnataka', description: 'Golden yellow split pigeon peas. Rich in protein, iron, calcium, and folic acid.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p7', name: 'Moong Dal', category: 'Pulses', origin: 'Rajasthan, Maharashtra, Karnataka', description: 'Split green gram. Soft, cooks quickly, light and easily digestible.', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p8', name: 'Masoor Dal (Red Lentils)', category: 'Pulses', origin: 'Madhya Pradesh, Uttar Pradesh', description: 'Split red lentils. Soft, creamy texture, rich in protein, iron, and folate.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p9', name: 'Chana Dal', category: 'Pulses', origin: 'Madhya Pradesh, Uttar Pradesh', description: 'Split Bengal gram. Golden yellow, mildly nutty flavor, firm yet tender.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p10', name: 'Urad Dal (White Dehusked)', category: 'Pulses', origin: 'Madhya Pradesh, Uttar Pradesh', description: 'Dehusked split black gram. Soft, creamy texture essential for idli/dosa fermentation.', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p11', name: 'Rajma Red Lobia', category: 'Pulses', origin: 'Jammu & Kashmir, Himachal Pradesh', description: 'Deep red kidney beans from Himalayan foothills. Firm, cooks soft for Rajma Masala.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p12', name: 'Chawla White Lobia', category: 'Pulses', origin: 'Madhya Pradesh, Rajasthan', description: 'Creamy white cowpeas. Mildly nutty, wholesome for curries, stews, and salads.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p13', name: 'Roasted Gram Dal', category: 'Pulses', origin: 'Madhya Pradesh, Uttar Pradesh', description: 'Dry-roasted split Bengal gram. Crunchy, ready-to-eat snack for instant nutrition.', image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p14', name: 'Kabuli Channa', category: 'Pulses', origin: 'Madhya Pradesh, Rajasthan', description: 'Large creamy white chickpeas with mild nutty taste for chole, salads, and hummus.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p15', name: 'Kalachana', category: 'Pulses', origin: 'Madhya Pradesh, Maharashtra', description: 'Black chickpeas. Dark, robust, nutrient-dense for chaat, gravies, and sprouts.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p16', name: 'Dry Green Peas', category: 'Pulses', origin: 'Rajasthan, Madhya Pradesh', description: 'Whole green peas. Retains vibrant green hue and natural sweetness after cooking.', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p17', name: 'Dry White Peas', category: 'Pulses', origin: 'Madhya Pradesh, Uttar Pradesh', description: 'Whole white peas. Cooks tender with a mild earthy taste for street-style ragda.', image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p18', name: 'Uradu Dhal Whole Black', category: 'Pulses', origin: 'Madhya Pradesh, Uttar Pradesh', description: 'Whole black gram. Creamy white interior, essential for authentic Dal Makhani.', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p19', name: 'Green Moong Whole', category: 'Pulses', origin: 'Rajasthan, Maharashtra', description: 'Whole green gram. Highly digestible, perfect for sprouting, khichdi, and salads.', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p20', name: 'Pearl Millet / Kambu', category: 'Millets', origin: 'Rajasthan, Maharashtra', description: 'Whole millet grain. High fiber and iron, perfect for traditional porridge and rotis.', image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p21', name: 'Jowar Millet / Cholam', category: 'Millets', origin: 'Maharashtra, Karnataka', description: 'Naturally gluten-free whole millet. Mildly sweet, great for flatbreads and rotis.', image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p22', name: 'Ragi Millet / Kezhvaragu', category: 'Millets', origin: 'Karnataka, Tamil Nadu', description: 'Calcium-rich red finger millet. Contains 3x more calcium than milk for porridge and malt.', image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p23', name: 'Barnyard Millet / Kuthiraivali', category: 'Millets', origin: 'Tamil Nadu, Karnataka', description: 'Fast cooking low-GI grain. Soft and fluffy texture for healthy upma and pongal.', image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p24', name: 'Little Millet / Samai', category: 'Millets', origin: 'Tamil Nadu, Karnataka', description: 'Naturally small-grained aromatic millet. Non-sticky rice alternative for daily meals.', image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p25', name: 'Kodo Millet / Varagu', category: 'Millets', origin: 'Tamil Nadu, Karnataka', description: 'High in dietary fiber and polyphenols. Firm grains stay fluffy after cooking.', image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p26', name: 'Foxtail Millet / Thinai', category: 'Millets', origin: 'Tamil Nadu, Karnataka', description: 'Golden brown millet. Rich in magnesium and B-complex vitamins for upma and pulao.', image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop' },
+      { id: 'p27', name: 'Karuppu Kavuni Rice (Black Kavuni)', category: 'Rice', origin: 'Tamil Nadu, Kerala', description: 'Ancient royal black rice. High anthocyanin antioxidant content, rich and chewy.', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop' }
+    ];
+
+    // --- MAIN APP ---
+    function App() {
+      const [view, setView] = useState('home');
+      const [selectedProduct, setSelectedProduct] = useState(null);
+      const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
+      useEffect(() => {
+        lucide.createIcons();
+      }, [view, selectedProduct, isQuoteModalOpen]);
+
+      return (
+        <div className="min-h-screen bg-[#1C1C1C] flex flex-col justify-between">
+          
+          {/* HEADER */}
+          <header className="sticky top-0 z-50 bg-[#141414]/95 backdrop-blur-md py-4 border-b border-[#333333]">
+            <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+              <div className="flex flex-col cursor-pointer" onClick={() => setView('home')}>
+                <div className="flex items-center gap-1">
+                  <span className="font-extrabold text-3xl tracking-wider text-[#EFA721]">KoKo</span>
+                  <span className="w-2 h-2 rounded-full bg-[#EFA721] animate-pulse"></span>
+                </div>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-white uppercase -mt-1">
+                  INDIAN GROCERY STORE & GLOBAL DISTRIBUTOR
+                </span>
+              </div>
+
+              <nav className="hidden md:flex items-center gap-8 text-sm font-semibold">
+                <button onClick={() => setView('home')} className={`hover:text-[#EFA721] ${view === 'home' ? 'text-[#EFA721] border-b-2 border-[#EFA721]' : 'text-white'}`}>HOME</button>
+                <button onClick={() => setView('shop')} className={`hover:text-[#EFA721] ${view === 'shop' ? 'text-[#EFA721] border-b-2 border-[#EFA721]' : 'text-white'}`}>SHOP ({PRODUCTS.length} SKUs)</button>
+              </nav>
+
+              <button onClick={() => setIsQuoteModalOpen(true)} className="bg-[#EFA721] hover:bg-[#F8C765] text-[#1C1C1C] font-extrabold text-xs px-5 py-2.5 rounded-md btn-gold-glow">GET QUOTE</button>
+            </div>
+          </header>
+
+          {/* MAIN VIEWS */}
+          <main className="flex-1">
+            {view === 'home' && (
+              <div>
+                <section className="relative py-24 bg-[#1C1C1C] border-b border-[#2A2A2A] text-center">
+                  <div className="max-w-5xl mx-auto px-4 space-y-6">
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-[#242424] border border-[#EFA721]/40 text-[#EFA721] text-xs font-bold uppercase">INDIAN FOOD • GLOBAL REACH</span>
+                    <h1 className="text-4xl sm:text-7xl font-extrabold text-white">AUTHENTIC INDIAN FOOD. <span className="text-gold-gradient block">CONNECTED TO THE WORLD.</span></h1>
+                    <p className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto">KOKO Global Distributor connects trusted Indian manufacturers with international buyers through quality sourcing, export management, and reliable global distribution.</p>
+                    <div className="pt-4 flex justify-center gap-4">
+                      <button onClick={() => setView('shop')} className="bg-[#EFA721] text-[#1C1C1C] font-extrabold px-8 py-4 rounded-md btn-gold-glow">EXPLORE CATALOG ({PRODUCTS.length} PRODUCTS)</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="py-20 max-w-7xl mx-auto px-4">
+                  <h2 className="text-3xl font-extrabold text-white text-center mb-8">VERIFIED EXPORT PRODUCTS ({PRODUCTS.length} ITEMS)</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {PRODUCTS.slice(0, 8).map(prod => (
+                      <div key={prod.id} className="bg-[#242424] rounded-xl overflow-hidden border border-[#333333] p-4 flex flex-col justify-between">
+                        <img src={prod.image} className="w-full h-44 object-cover rounded-lg" />
+                        <div className="my-2">
+                          <span className="text-[10px] text-[#EFA721] font-mono uppercase bg-[#1C1C1C] px-2 py-0.5 rounded">{prod.category}</span>
+                          <h3 className="text-base font-bold text-white mt-1">{prod.name}</h3>
+                          <p className="text-xs text-gray-400 line-clamp-2 mt-1">{prod.description}</p>
+                          <span className="text-[10px] text-gray-500 block mt-1">Origin: {prod.origin}</span>
+                        </div>
+                        <button onClick={() => setSelectedProduct(prod)} className="w-full bg-[#1C1C1C] text-[#EFA721] text-xs py-2 rounded font-bold border border-[#333333] hover:border-[#EFA721]">VIEW DETAILS</button>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {view === 'shop' && (
+              <div className="max-w-7xl mx-auto px-4 py-16">
+                <h1 className="text-4xl font-extrabold text-white mb-2">PRODUCT CATALOG ({PRODUCTS.length} SKUs)</h1>
+                <p className="text-sm text-gray-400 mb-8">Directly sourced from verified Indian agricultural processors according to Product Description.xlsx specification.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {PRODUCTS.map(prod => (
+                    <div key={prod.id} className="bg-[#242424] rounded-xl overflow-hidden border border-[#333333] p-4 flex flex-col justify-between">
+                      <img src={prod.image} className="w-full h-44 object-cover rounded-lg" />
+                      <div className="my-2">
+                        <span className="text-[10px] text-[#EFA721] font-mono uppercase bg-[#1C1C1C] px-2 py-0.5 rounded">{prod.category}</span>
+                        <h3 className="text-base font-bold text-white mt-1">{prod.name}</h3>
+                        <p className="text-xs text-gray-400 line-clamp-2 mt-1">{prod.description}</p>
+                        <span className="text-[10px] text-gray-500 block mt-1">Origin: {prod.origin}</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#333333]">
+                        <button onClick={() => setSelectedProduct(prod)} className="bg-[#1C1C1C] text-white text-xs py-2 rounded font-bold border border-[#333333] hover:border-[#EFA721]">DETAILS</button>
+                        <button onClick={() => setIsQuoteModalOpen(true)} className="bg-[#EFA721] text-[#1C1C1C] text-xs py-2 rounded font-extrabold">QUOTE</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </main>
+
+          {/* MODAL */}
+          {selectedProduct && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+              <div className="bg-[#1C1C1C] border border-[#EFA721]/50 rounded-2xl max-w-xl w-full p-6 text-white space-y-4">
+                <div className="flex justify-between items-center border-b border-[#333333] pb-3">
+                  <h3 className="text-xl font-bold">{selectedProduct.name}</h3>
+                  <button onClick={() => setSelectedProduct(null)} className="text-gray-400 hover:text-white text-xl">✕</button>
+                </div>
+                <img src={selectedProduct.image} className="w-full h-48 object-cover rounded-xl" />
+                <div className="text-xs space-y-2 text-gray-300">
+                  <p><strong className="text-[#EFA721]">Category:</strong> {selectedProduct.category}</p>
+                  <p><strong className="text-[#EFA721]">Origin:</strong> {selectedProduct.origin}</p>
+                  <p><strong className="text-[#EFA721]">Description:</strong> {selectedProduct.description}</p>
+                </div>
+                <button onClick={() => { setSelectedProduct(null); setIsQuoteModalOpen(true); }} className="w-full bg-[#EFA721] text-[#1C1C1C] font-extrabold py-3 rounded-lg">REQUEST B2B QUOTE FOR THIS ITEM</button>
+              </div>
+            </div>
+          )}
+
+          <footer className="bg-[#141414] border-t border-[#333333] py-8 text-center text-xs text-gray-400">
+            <p>© {new Date().getFullYear()} KOKO Global Distributor / KOKO Indian Grocery Store. All rights reserved.</p>
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
