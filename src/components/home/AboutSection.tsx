@@ -68,7 +68,7 @@ export const AboutSection: React.FC = () => {
             </h2>
 
             <p className="text-sm text-gray-300 leading-relaxed">
-              {ABOUT_CONTENT.intro}
+              {ABOUT_CONTENT.introParagraphs[0]}
             </p>
 
             {/* WHAT WE DO KEY SERVICES */}

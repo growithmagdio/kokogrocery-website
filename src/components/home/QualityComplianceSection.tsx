@@ -26,9 +26,11 @@ export const QualityComplianceSection: React.FC = () => {
         {/* COMPLIANCE OVERVIEW CONTENT */}
         <div className="bg-[#F4F4F5] p-8 sm:p-10 rounded-2xl border border-gray-200 mb-12 max-w-4xl mx-auto text-center space-y-4">
           <ShieldCheck className="w-12 h-12 text-[#EFA721] mx-auto" />
-          <p className="text-sm sm:text-base text-gray-800 leading-relaxed font-sans max-w-3xl mx-auto">
-            "{ABOUT_CONTENT.qualityCompliance.text}"
-          </p>
+          {ABOUT_CONTENT.qualityCompliance.paragraphs.map((paragraph, idx) => (
+            <p key={idx} className="text-sm sm:text-base text-gray-800 leading-relaxed font-sans max-w-3xl mx-auto">
+              {paragraph}
+            </p>
+          ))}
         </div>
 
         {/* 4 SPECIFIC REGISTRATION CARDS */}
