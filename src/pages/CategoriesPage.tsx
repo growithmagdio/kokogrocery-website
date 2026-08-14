@@ -68,6 +68,9 @@ export const CategoriesPage: React.FC<CategoriesPageProps> = ({
           <img
             src={currentCategory.image}
             alt={currentCategory.name}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop';
+            }}
             className="w-full h-full object-cover object-center opacity-40 filter contrast-125"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/60 to-transparent" />

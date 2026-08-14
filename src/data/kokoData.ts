@@ -15,7 +15,7 @@ export const CATEGORIES: Category[] = [
     slug: 'millets',
     description: 'Nutritious traditional Indian millets such as Foxtail Millet, Little Millet, Kodo Millet, Barnyard Millet, Finger Millet, Pearl Millet, and Sorghum.',
     count: 14,
-    image: 'https://images.unsplash.com/photo-1627736631541-74513ede9a8a?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'cat-pulses',
@@ -23,7 +23,7 @@ export const CATEGORIES: Category[] = [
     slug: 'pulses',
     description: 'High-quality lentils and pulses including Toor Dal, Urad Dal, Moong Dal, Chana Dal, Masoor Dal, Lobia, and whole pulses.',
     count: 21,
-    image: 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=800&auto=format&fit=crop',
   },
   {
     id: 'cat-spices',
