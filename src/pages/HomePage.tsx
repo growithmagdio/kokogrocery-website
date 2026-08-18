@@ -1,14 +1,13 @@
 import React from 'react';
 import { Hero } from '../components/home/Hero';
-import { TrustStrip } from '../components/home/TrustStrip';
-import { CategoriesSection } from '../components/home/CategoriesSection';
-import { FeaturedProducts } from '../components/home/FeaturedProducts';
-import { WhyKokoSection } from '../components/home/WhyKokoSection';
 import { AboutSection } from '../components/home/AboutSection';
-import { BusinessPhilosophy } from '../components/home/BusinessPhilosophy';
+import { CategoriesSection } from '../components/home/CategoriesSection';
 import { GlobalPresenceSection } from '../components/home/GlobalPresenceSection';
-import { ProductPortfolioSection } from '../components/home/ProductPortfolioSection';
+import { ServicesSection } from '../components/home/ServicesSection';
+import { ExportProcessSection } from '../components/home/ExportProcessSection';
 import { QualityComplianceSection } from '../components/home/QualityComplianceSection';
+import { WhoWeServeSection } from '../components/home/WhoWeServeSection';
+import { WhyKokoSection } from '../components/home/WhyKokoSection';
 import { B2BExportCTA } from '../components/home/B2BExportCTA';
 import { Product } from '../types';
 
@@ -22,42 +21,38 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenQuoteModal,
 }) => {
   return (
-    <div className="space-y-0">
-      {/* 1. HERO SECTION */}
+    <div className="space-y-0 bg-[#0B0C0E]">
+      {/* 1. HERO */}
       <Hero onOpenQuoteModal={() => onOpenQuoteModal()} />
 
-      {/* 2. TRUST STRIP */}
-      <TrustStrip />
-
-      {/* 3. PRODUCT CATEGORIES */}
-      <CategoriesSection />
-
-      {/* 4. FEATURED PRODUCTS */}
-      <FeaturedProducts
-        onSelectProduct={onSelectProduct}
-        onOpenQuoteModal={onOpenQuoteModal}
-      />
-
-      {/* 5. WHY KOKO */}
-      <WhyKokoSection />
-
-      {/* 6. ABOUT KOKO */}
+      {/* 2. WHO WE ARE */}
       <AboutSection />
 
-      {/* 7. OUR BUSINESS PHILOSOPHY */}
-      <BusinessPhilosophy />
+      {/* 3. WHAT WE EXPORT */}
+      <CategoriesSection />
 
-      {/* 8. GLOBAL PRESENCE */}
+      {/* 4. GLOBAL REACH */}
       <GlobalPresenceSection />
 
-      {/* 9. PRODUCT PORTFOLIO */}
-      <ProductPortfolioSection />
+      {/* 5. OUR SERVICES */}
+      <ServicesSection />
 
-      {/* 10. QUALITY & COMPLIANCE */}
+      {/* 6. HOW IT WORKS */}
+      <ExportProcessSection />
+
+      {/* 7. QUALITY & COMPLIANCE */}
       <QualityComplianceSection />
 
-      {/* 11. B2B EXPORT CTA */}
+      {/* 8. WHO WE SERVE */}
+      <WhoWeServeSection />
+
+      {/* 9. WHY KOKO */}
+      <WhyKokoSection />
+
+      {/* 10. B2B ENQUIRY */}
       <B2BExportCTA onOpenQuoteModal={() => onOpenQuoteModal()} />
     </div>
   );
 };
+
+export default HomePage;

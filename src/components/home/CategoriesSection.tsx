@@ -1,29 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { CATEGORIES } from '../../data/kokoData';
 import { motion } from 'framer-motion';
+import { ImageWithFallback } from '../common/ImageWithFallback';
 
 export const CategoriesSection: React.FC = () => {
   return (
-    <section className="py-20 bg-[#1C1C1C] border-b border-[#2A2A2A]">
+    <section className="py-24 bg-[#0B0C0E] border-b border-[#2D303E]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* SECTION HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-block px-3 py-1 bg-[#242424] text-[#EFA721] font-mono text-xs font-bold rounded uppercase tracking-widest border border-[#EFA721]/30">
-            Export Portfolio
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
-            EXPLORE OUR PRODUCTS
+        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+          <span className="text-xs font-extrabold tracking-[0.25em] text-[#F59E0B] uppercase">
+            WHAT WE EXPORT
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-sans text-white font-extrabold tracking-tight uppercase">
+            Indian Export Product Portfolio
           </h2>
-          <p className="text-sm sm:text-base text-gray-400">
-            Premium Indian food products sourced for global markets.
+          <div className="gold-line mx-auto" />
+          <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal">
+            Explore our core export categories prepared for international distribution, bulk supply, and private labeling.
           </p>
         </div>
 
-        {/* 8 CATEGORY CARDS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 8 EDITORIAL CATEGORY CARDS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {CATEGORIES.map((cat, idx) => (
             <motion.div
               key={cat.id}
@@ -34,44 +36,48 @@ export const CategoriesSection: React.FC = () => {
             >
               <Link
                 to={`/categories?slug=${cat.slug}`}
-                className="group relative block bg-[#242424] rounded-xl overflow-hidden border border-[#333333] hover:border-[#EFA721] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-card-hover"
+                className="group relative block bg-[#16171E] rounded-xl overflow-hidden border border-[#2D303E] hover:border-[#F59E0B] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-card-hover flex flex-col h-full justify-between"
               >
-                {/* CATEGORY IMAGE CONTAINER */}
-                <div className="relative h-56 w-full overflow-hidden">
-                  <img
+                {/* CATEGORY IMAGE */}
+                <div className="relative h-60 w-full overflow-hidden">
+                  <ImageWithFallback
                     src={cat.image}
                     alt={cat.name}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop';
-                    }}
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    category={cat.slug}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/40 to-transparent" />
                   
-                  {/* COUNT BADGE */}
-                  <div className="absolute top-3 right-3 bg-[#1C1C1C]/90 backdrop-blur-md text-[#EFA721] text-xs font-mono font-bold px-2.5 py-1 rounded border border-[#EFA721]/40">
+                  {/* EXPORT BADGE */}
+                  <div className="absolute top-4 left-4 bg-[#0B0C0E]/90 backdrop-blur-md text-[#F59E0B] text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded border border-[#F59E0B]/40">
+                    AVAILABLE FOR EXPORT
+                  </div>
+
+                  <div className="absolute bottom-3 right-4 text-[11px] font-mono text-white/70">
                     {cat.count} SKUs
                   </div>
                 </div>
 
                 {/* CONTENT */}
-                <div className="p-5 relative z-10 flex items-center justify-between">
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <h3 className="text-lg font-bold text-white group-hover:text-[#EFA721] transition-colors font-heading">
+                    <h3 className="text-xl font-sans font-extrabold text-white uppercase group-hover:text-[#F59E0B] transition-colors">
                       {cat.name}
                     </h3>
-                    <p className="text-xs text-gray-400 line-clamp-1 mt-1 font-sans">
+
+                    <div className="w-8 h-0.5 bg-[#F59E0B]/40 my-3 group-hover:w-16 transition-all duration-300" />
+
+                    <p className="text-xs text-white/75 font-normal leading-relaxed line-clamp-2">
                       {cat.description}
                     </p>
                   </div>
 
-                  <div className="w-10 h-10 rounded-full bg-[#1C1C1C] border border-[#333333] group-hover:border-[#EFA721] group-hover:bg-[#EFA721] flex items-center justify-center transition-all duration-300 shrink-0 ml-2">
-                    <ArrowUpRight className="w-5 h-5 text-white group-hover:text-[#1C1C1C] transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <div className="pt-2 flex items-center justify-between text-xs font-extrabold text-[#F59E0B] uppercase tracking-wider group-hover:text-[#FBBF24]">
+                    <span>VIEW CATEGORY</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
 
-                {/* BOTTOM GOLD HOVER BORDER STRIP */}
-                <div className="h-1 w-0 bg-[#EFA721] group-hover:w-full transition-all duration-300" />
               </Link>
             </motion.div>
           ))}

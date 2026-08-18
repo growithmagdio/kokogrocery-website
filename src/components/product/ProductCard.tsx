@@ -1,6 +1,7 @@
 import React from 'react';
 import { Product } from '../../types';
-import { Eye, Send, MapPin, PackageCheck } from 'lucide-react';
+import { Eye, Send, MapPin, Check } from 'lucide-react';
+import { ImageWithFallback } from '../common/ImageWithFallback';
 
 interface ProductCardProps {
   product: Product;
@@ -14,68 +15,68 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onOpenQuoteModal,
 }) => {
   return (
-    <div className="bg-[#242424] rounded-xl overflow-hidden border border-[#333333] hover:border-[#EFA721] transition-all duration-300 flex flex-col justify-between group hover:shadow-card-hover">
+    <div className="bg-[#16171E] rounded-xl overflow-hidden border border-[#2D303E] hover:border-[#F59E0B] transition-all duration-300 flex flex-col justify-between group hover:shadow-card-hover hover:-translate-y-1">
       
-      {/* IMAGE & BADGES */}
-      <div className="relative h-56 w-full overflow-hidden bg-[#1C1C1C]">
-        <img
+      {/* IMAGE CONTAINER */}
+      <div className="relative h-56 w-full overflow-hidden bg-[#0B0C0E]">
+        <ImageWithFallback
           src={product.image}
           alt={product.name}
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop';
-          }}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          category={product.categorySlug}
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#242424] via-transparent to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-transparent to-transparent opacity-80" />
 
         {/* CATEGORY BADGE */}
-        <span className="absolute top-3 left-3 bg-[#1C1C1C]/90 backdrop-blur-md text-[#EFA721] text-[10px] font-bold tracking-wider px-2.5 py-1 rounded uppercase border border-[#EFA721]/30">
+        <span className="absolute top-3 left-3 bg-[#0B0C0E]/95 text-[#F59E0B] text-[10px] font-extrabold tracking-wider px-2.5 py-1 rounded uppercase border border-[#F59E0B]/40">
           {product.category}
         </span>
 
         {/* ORIGIN BADGE */}
-        <span className="absolute top-3 right-3 bg-[#141414]/90 text-gray-300 text-[10px] font-mono px-2.5 py-1 rounded flex items-center gap-1 border border-[#333333]">
-          <MapPin className="w-3 h-3 text-[#EFA721]" />
+        <span className="absolute top-3 right-3 bg-[#0B0C0E]/95 text-white/80 text-[10px] font-mono px-2.5 py-1 rounded flex items-center gap-1 border border-[#2D303E]">
+          <MapPin className="w-3 h-3 text-[#F59E0B]" />
           <span>{product.origin.split(',')[0]}</span>
         </span>
       </div>
 
       {/* CONTENT */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          <h3 className="text-base font-bold text-white group-hover:text-[#EFA721] transition-colors line-clamp-1 font-heading">
+          <h3 className="text-lg font-sans font-extrabold text-white group-hover:text-[#F59E0B] transition-colors uppercase line-clamp-1">
             {product.name}
           </h3>
+
+          <div className="w-8 h-0.5 bg-[#F59E0B]/40 my-2 group-hover:w-12 transition-all duration-300" />
           
-          <p className="text-xs text-gray-400 line-clamp-2 mt-1.5 leading-relaxed font-sans">
+          <p className="text-xs text-white/75 font-normal line-clamp-2 leading-relaxed">
             {product.description}
           </p>
         </div>
 
-        {/* SPEC HIGHLIGHTS */}
-        <div className="pt-2 border-t border-[#333333] flex items-center justify-between text-[11px] text-gray-400 font-mono">
-          <span className="flex items-center gap-1">
-            <PackageCheck className="w-3.5 h-3.5 text-[#EFA721]" />
-            <span>Type: {product.productType.split(' ')[0]}</span>
+        {/* EXPORT SPECIFICATIONS */}
+        <div className="pt-2 border-t border-[#2D303E] flex items-center justify-between text-[11px] text-white/70 font-mono">
+          <span className="flex items-center gap-1 text-[#F59E0B] font-bold">
+            <Check className="w-3.5 h-3.5" />
+            <span>AVAILABLE FOR EXPORT</span>
           </span>
-          <span className="text-[#EFA721] font-bold">Export Grade</span>
+          <span className="text-white/60">Grade A</span>
         </div>
 
         {/* BUTTON ACTIONS */}
-        <div className="pt-3 grid grid-cols-2 gap-2">
+        <div className="pt-2 grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => onSelectProduct(product)}
-            className="flex items-center justify-center gap-1.5 bg-[#1C1C1C] hover:bg-[#2A2A2A] text-white text-xs font-bold py-2.5 px-3 rounded border border-[#333333] hover:border-[#EFA721] transition-colors"
+            className="flex items-center justify-center gap-1.5 bg-[#0B0C0E] hover:bg-[#16171E] text-white text-xs font-bold py-2.5 px-3 rounded border border-[#2D303E] hover:border-[#F59E0B] transition-colors uppercase tracking-wider"
           >
-            <Eye className="w-3.5 h-3.5 text-[#EFA721]" />
+            <Eye className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>DETAILS</span>
           </button>
 
           <button
             type="button"
             onClick={() => onOpenQuoteModal(product.name)}
-            className="flex items-center justify-center gap-1.5 bg-[#EFA721] hover:bg-[#F8C765] text-[#1C1C1C] text-xs font-extrabold py-2.5 px-3 rounded transition-colors shadow-sm"
+            className="flex items-center justify-center gap-1.5 bg-[#F59E0B] hover:bg-[#FBBF24] text-[#0B0C0E] text-xs font-extrabold py-2.5 px-3 rounded transition-colors shadow-sm uppercase tracking-wider"
           >
             <Send className="w-3.5 h-3.5" />
             <span>QUOTE</span>

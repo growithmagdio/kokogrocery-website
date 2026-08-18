@@ -7,33 +7,40 @@ export const QualityComplianceSection: React.FC = () => {
   const certIcons = [FileCheck, Globe, ShieldCheck, Award];
 
   return (
-    <section className="py-24 bg-white text-[#1C1C1C] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="quality" className="py-24 bg-[#0B0C0E] border-b border-[#2D303E] relative overflow-hidden">
+      
+      {/* AMBIENT GLOW */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#F59E0B]/10 rounded-full filter blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* SECTION HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-block px-3 py-1 bg-[#1C1C1C] text-[#EFA721] font-mono text-xs font-bold rounded uppercase tracking-widest">
-            Regulatory Standard
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-[#1C1C1C] tracking-tight">
-            QUALITY YOU CAN TRUST
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <span className="text-xs font-extrabold tracking-[0.25em] text-[#F59E0B] uppercase">
+            REGULATORY STANDARDS
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-sans text-white font-extrabold tracking-tight uppercase">
+            Quality Without Compromise
           </h2>
-          <p className="text-sm sm:text-base text-gray-600">
-            Compliant with destination-country food safety standards and international trade regulations.
+          <div className="gold-line mx-auto" />
+          <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal">
+            Compliant with destination-country food safety regulations, phytosanitary requirements, and international trade standards.
           </p>
         </div>
 
-        {/* COMPLIANCE OVERVIEW CONTENT */}
-        <div className="bg-[#F4F4F5] p-8 sm:p-10 rounded-2xl border border-gray-200 mb-12 max-w-4xl mx-auto text-center space-y-4">
-          <ShieldCheck className="w-12 h-12 text-[#EFA721] mx-auto" />
+        {/* OVERVIEW PARAGRAPHS CARD */}
+        <div className="bg-[#16171E] p-8 sm:p-10 rounded-2xl border border-[#2D303E] mb-14 max-w-4xl mx-auto text-center space-y-4 shadow-xl">
+          <div className="w-12 h-12 rounded-full bg-[#0B0C0E] text-[#F59E0B] border border-[#F59E0B]/40 flex items-center justify-center mx-auto">
+            <ShieldCheck className="w-6 h-6" />
+          </div>
           {ABOUT_CONTENT.qualityCompliance.paragraphs.map((paragraph, idx) => (
-            <p key={idx} className="text-sm sm:text-base text-gray-800 leading-relaxed font-sans max-w-3xl mx-auto">
+            <p key={idx} className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal max-w-3xl mx-auto">
               {paragraph}
             </p>
           ))}
         </div>
 
-        {/* 4 SPECIFIC REGISTRATION CARDS */}
+        {/* 4 REGISTRATION BADGE CARDS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {ABOUT_CONTENT.qualityCompliance.certifications.map((cert, idx) => {
             const IconComponent = certIcons[idx % certIcons.length];
@@ -44,25 +51,25 @@ export const QualityComplianceSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-[#EFA721] transition-all duration-300 shadow-sm hover:shadow-lg group flex flex-col justify-between"
+                className="bg-[#16171E] p-6 rounded-xl border border-[#2D303E] hover:border-[#F59E0B] transition-all duration-300 shadow-sm hover:shadow-card-hover group flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-lg bg-[#1C1C1C] text-[#EFA721] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-lg bg-[#0B0C0E] text-[#F59E0B] border border-[#2D303E] flex items-center justify-center mb-4 group-hover:bg-[#F59E0B] group-hover:text-[#0B0C0E] transition-colors">
                     <IconComponent className="w-6 h-6" />
                   </div>
 
-                  <h3 className="text-2xl font-extrabold font-heading text-[#1C1C1C] tracking-wider">
+                  <h3 className="text-2xl font-sans font-extrabold text-white tracking-wider uppercase">
                     {cert.name}
                   </h3>
 
-                  <p className="text-xs text-gray-600 mt-2 leading-relaxed font-medium">
+                  <p className="text-xs text-white/75 mt-2 leading-relaxed font-normal">
                     {cert.full}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-3 border-t border-gray-100 flex items-center gap-1 text-[11px] font-bold text-[#EFA721]">
+                <div className="mt-6 pt-3 border-t border-[#2D303E] flex items-center gap-1.5 text-[11px] font-extrabold text-[#F59E0B] uppercase tracking-wider">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Officially Registered</span>
+                  <span>VERIFIED REGISTRATION</span>
                 </div>
               </motion.div>
             );

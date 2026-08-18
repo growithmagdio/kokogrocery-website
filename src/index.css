@@ -4,38 +4,39 @@
 
 @layer base {
   body {
-    background-color: #1C1C1C;
+    background-color: #0B0C0E;
     color: #FFFFFF;
-    font-family: 'Outfit', 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-weight: 800;
   }
 }
 
-/* Custom Metallic Gold Text Gradient */
+/* Custom Warm Gold Text Gradient */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #FFF0B9 0%, #EFA721 50%, #C9850E 100%);
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Custom Gold Metallic Border */
-.border-gold-glow {
-  border: 1px solid rgba(239, 167, 33, 0.4);
-  box-shadow: 0 0 15px rgba(239, 167, 33, 0.15);
-}
-
-.border-gold-glow:hover {
-  border: 1px solid rgba(239, 167, 33, 0.9);
-  box-shadow: 0 0 25px rgba(239, 167, 33, 0.35);
+/* Custom Gold Accent Line */
+.gold-line {
+  height: 2px;
+  width: 40px;
+  background: linear-gradient(90deg, #F59E0B 0%, #FBBF24 100%);
 }
 
 /* Custom Gold Button Glow */
 .btn-gold-glow {
-  box-shadow: 0 4px 20px rgba(239, 167, 33, 0.3);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-gold-glow:hover {
-  box-shadow: 0 6px 30px rgba(239, 167, 33, 0.5);
+  box-shadow: 0 6px 28px rgba(245, 158, 11, 0.5);
   transform: translateY(-2px);
 }
 
@@ -46,22 +47,23 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #141414;
+  background: #0B0C0E;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333333;
+  background: #16171E;
+  border: 1px solid rgba(245, 158, 11, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #EFA721;
+  background: #F59E0B;
 }
 
 /* Keyframes */
 @keyframes floatSlow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
 }
 
 .animate-float {
@@ -69,10 +71,11 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.08); }
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
 }
 
 .animate-pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
+  animation: pulseGlow 4s ease-in-out infinite;
 }
+

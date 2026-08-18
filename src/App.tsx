@@ -13,6 +13,7 @@ import { ProductDetailModal } from './components/product/ProductDetailModal';
 import { QuoteModal } from './components/modals/QuoteModal';
 import { CartDrawer } from './components/modals/CartDrawer';
 import { SearchModal } from './components/search/SearchModal';
+import { WhatsAppWidget } from './components/common/WhatsAppWidget';
 
 import { Product, CartItem } from './types';
 
@@ -85,7 +86,7 @@ export const AppContent: React.FC = () => {
   const totalCartItemsCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#1C1C1C] flex flex-col justify-between selection:bg-[#EFA721] selection:text-[#1C1C1C]">
+    <div className="min-h-screen bg-[#0B0C0E] flex flex-col justify-between selection:bg-[#F59E0B] selection:text-[#0B0C0E]">
       <ScrollToTop />
 
       {/* HEADER */}
@@ -118,6 +119,15 @@ export const AppContent: React.FC = () => {
             }
           />
           <Route
+            path="/products"
+            element={
+              <ShopPage
+                onSelectProduct={(p) => setSelectedProduct(p)}
+                onOpenQuoteModal={handleOpenQuoteModal}
+              />
+            }
+          />
+          <Route
             path="/about"
             element={<AboutPage onOpenQuoteModal={handleOpenQuoteModal} />}
           />
@@ -140,6 +150,9 @@ export const AppContent: React.FC = () => {
 
       {/* FOOTER */}
       <Footer />
+
+      {/* FLOATING WHATSAPP BUTTON */}
+      <WhatsAppWidget />
 
       {/* MODALS & DRAWERS */}
       <ProductDetailModal

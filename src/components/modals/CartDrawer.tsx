@@ -1,6 +1,7 @@
 import React from 'react';
-import { X, ShoppingBag, Trash2, ArrowRight, Send } from 'lucide-react';
+import { X, ShoppingBag, Trash2, Send } from 'lucide-react';
 import { CartItem } from '../../types';
+import { ImageWithFallback } from '../common/ImageWithFallback';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -30,21 +31,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       />
 
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#1C1C1C] border-l border-[#333333] shadow-2xl flex flex-col justify-between text-white">
+        <div className="w-screen max-w-md bg-[#0B0C0E] border-l border-[#2D303E] shadow-2xl flex flex-col justify-between text-white">
           
           {/* DRAWER HEADER */}
-          <div className="p-5 border-b border-[#2A2A2A] flex items-center justify-between">
+          <div className="p-5 border-b border-[#2D303E] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5 text-[#EFA721]" />
-              <h3 className="text-base font-bold font-heading">Sample & B2B Selection</h3>
-              <span className="bg-[#242424] text-[#EFA721] text-xs font-mono font-bold px-2 py-0.5 rounded border border-[#333333]">
+              <ShoppingBag className="w-5 h-5 text-[#F59E0B]" />
+              <h3 className="text-base font-sans font-extrabold uppercase">Sample & Export Selection</h3>
+              <span className="bg-[#16171E] text-[#F59E0B] text-xs font-mono font-extrabold px-2 py-0.5 rounded border border-[#F59E0B]/40">
                 {items.length} Items
               </span>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-full hover:bg-[#242424] text-gray-400 hover:text-white"
+              className="p-1.5 rounded-full hover:bg-[#16171E] text-white/60 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
@@ -54,45 +55,46 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           <div className="flex-1 overflow-y-auto p-5 space-y-4">
             {items.length === 0 ? (
               <div className="text-center py-16 space-y-3">
-                <ShoppingBag className="w-12 h-12 text-gray-600 mx-auto" />
-                <p className="text-sm font-semibold text-gray-300">Your selection list is empty</p>
-                <p className="text-xs text-gray-500 max-w-xs mx-auto">
-                  Browse products in our shop catalog to add items for sample requests or wholesale quotes.
+                <ShoppingBag className="w-12 h-12 text-[#F59E0B]/40 mx-auto" />
+                <p className="text-sm font-sans font-extrabold text-white uppercase">Your selection list is empty</p>
+                <p className="text-xs text-white/60 max-w-xs mx-auto font-normal">
+                  Browse products in our export catalogue to add items for sample requests or container quotes.
                 </p>
               </div>
             ) : (
               items.map((item) => (
                 <div
                   key={item.product.id}
-                  className="bg-[#242424] p-3.5 rounded-xl border border-[#333333] flex items-center gap-3"
+                  className="bg-[#16171E] p-3.5 rounded-xl border border-[#2D303E] flex items-center gap-3"
                 >
-                  <img
+                  <ImageWithFallback
                     src={item.product.image}
                     alt={item.product.name}
-                    className="w-16 h-16 object-cover rounded-lg bg-[#141414] shrink-0"
+                    category={item.product.categorySlug}
+                    className="w-16 h-16 object-cover rounded-lg bg-[#0B0C0E] shrink-0"
                   />
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-xs font-bold text-white truncate font-heading">
+                    <h4 className="text-xs font-sans font-extrabold text-white uppercase truncate">
                       {item.product.name}
                     </h4>
-                    <span className="text-[10px] text-[#EFA721] uppercase block font-mono mt-0.5">
+                    <span className="text-[10px] text-[#F59E0B] uppercase block font-mono font-extrabold mt-0.5">
                       {item.product.category}
                     </span>
 
                     <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center gap-2 bg-[#1C1C1C] border border-[#333333] rounded px-2 py-0.5 text-xs">
+                      <div className="flex items-center gap-2 bg-[#0B0C0E] border border-[#2D303E] rounded px-2 py-0.5 text-xs">
                         <button
                           type="button"
                           onClick={() => onUpdateQuantity(item.product.id, -1)}
-                          className="text-gray-400 hover:text-[#EFA721] px-1 font-bold"
+                          className="text-white/60 hover:text-[#F59E0B] px-1 font-bold"
                         >
                           -
                         </button>
-                        <span className="font-mono text-xs">{item.quantity}</span>
+                        <span className="font-mono text-xs text-white font-bold">{item.quantity}</span>
                         <button
                           type="button"
                           onClick={() => onUpdateQuantity(item.product.id, 1)}
-                          className="text-gray-400 hover:text-[#EFA721] px-1 font-bold"
+                          className="text-white/60 hover:text-[#F59E0B] px-1 font-bold"
                         >
                           +
                         </button>
@@ -101,7 +103,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <button
                         type="button"
                         onClick={() => onRemoveItem(item.product.id)}
-                        className="text-gray-500 hover:text-red-400 transition-colors p-1"
+                        className="text-white/50 hover:text-red-400 transition-colors p-1"
                         aria-label="Remove item"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -115,10 +117,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* FOOTER & CONVERT TO QUOTE */}
           {items.length > 0 && (
-            <div className="p-5 border-t border-[#2A2A2A] bg-[#141414] space-y-3">
-              <div className="text-xs text-gray-400 flex items-center justify-between">
-                <span>Selected Items:</span>
-                <span className="font-bold text-white">{items.length} SKUs</span>
+            <div className="p-5 border-t border-[#2D303E] bg-[#16171E] space-y-3">
+              <div className="text-xs text-white/80 flex items-center justify-between">
+                <span>Selected Export Items:</span>
+                <span className="font-extrabold text-white font-mono">{items.length} SKUs</span>
               </div>
 
               <button
@@ -128,7 +130,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   onClose();
                   onOpenQuoteModal(names);
                 }}
-                className="w-full flex items-center justify-center gap-2 bg-[#EFA721] hover:bg-[#F8C765] text-[#1C1C1C] font-extrabold text-sm py-3 rounded-md btn-gold-glow transition-all"
+                className="w-full flex items-center justify-center gap-2 bg-[#F59E0B] hover:bg-[#FBBF24] text-[#0B0C0E] font-extrabold text-xs py-3.5 rounded-md btn-gold-glow transition-all uppercase tracking-wider"
               >
                 <Send className="w-4 h-4" />
                 <span>REQUEST BULK B2B QUOTE ({items.length})</span>
